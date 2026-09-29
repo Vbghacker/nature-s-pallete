@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nature's Palette</title>
+<style>
+:root{
+  --green:#2f6f4e; --light:#eef7ee; --mint:#dff1df; --dark:#173b2a;
+  --cream:#fffaf0; --accent:#f2b84b; --pink:#e98989; --blue:#79b9d8;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--cream);color:#203328;line-height:1.6}
+header{position:sticky;top:0;z-index:10;background:rgba(255,250,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid #dfe8df}
+nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.logo{font-size:1.45rem;font-weight:800;color:var(--green)}
+nav a{color:#274734;text-decoration:none;margin-left:18px;font-weight:650}
+.hero{padding:72px 20px;text-align:center;background:linear-gradient(135deg,#e8f6e8,#fff7df)}
+.hero h1{font-size:clamp(2.3rem,7vw,4.5rem);margin:0;color:var(--dark)}
+.hero p{max-width:720px;margin:16px auto;font-size:1.1rem}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 20px;background:var(--green);color:white;font-weight:750;cursor:pointer;text-decoration:none}
+.section{max-width:1100px;margin:auto;padding:55px 20px}
+.section h2{font-size:2rem;color:var(--dark);margin-bottom:8px}
+.lead{max-width:750px;color:#52665a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px}
+.card{background:white;border:1px solid #e1e8e0;border-radius:20px;padding:22px;box-shadow:0 8px 25px rgba(35,70,45,.06)}
+.card .icon{font-size:2rem}
+.card h3{margin:8px 0 5px;color:var(--green)}
+.explore-nav{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}
+.explore-nav button{border:1px solid #bdd2bf;background:white;border-radius:999px;padding:9px 14px;cursor:pointer;font-weight:650}
+.explore-nav button.active{background:var(--green);color:white}
+.explore-panel{display:none}
+.explore-panel.active{display:block}
+.fact{background:var(--mint);border-left:5px solid var(--green);padding:15px 18px;border-radius:12px;margin:14px 0}
+.game{background:linear-gradient(145deg,#ffffff,#f1f8f1)}
+.choice{display:grid;gap:10px;margin-top:15px}
+.choice button{padding:12px;border-radius:12px;border:1px solid #cad8cb;background:#fff;text-align:left;cursor:pointer}
+.choice button:hover{border-color:var(--green)}
+.result{margin-top:14px;font-weight:750;min-height:26px}
+.palette{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.swatch{width:48px;height:48px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 1px #bbb;cursor:pointer}
+canvas{width:100%;max-width:500px;height:230px;border:2px dashed #aac4ad;border-radius:16px;background:#fbfff9;touch-action:none}
+.score{font-size:1.15rem;font-weight:800;color:var(--green)}
+footer{text-align:center;padding:35px 20px;background:var(--dark);color:white}
+.small{font-size:.9rem;color:#66776c}
+@media(max-width:650px){nav a{margin-left:8px;font-size:.9rem}.hero{padding:55px 18px}}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<div class="logo">🎨 Nature's Palette</div>
+<div><a href="#explore">Explore</a><a href="#games">Games</a><a href="#actions">Act</a></div>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Nature's Palette</h1>
+<p>Explore the colors, stories and living systems of our planet — then use creativity and compassion to help protect them.</p>
+<a class="btn" href="#explore">Start Exploring</a>
+</section>
+
+<section class="section" id="explore">
+<h2>🌿 Explore Nature</h2>
+<p class="lead">Go beyond simple facts. Discover how ecosystems connect, how art can build empathy, and how everyday choices can become acts of care.</p>
+<div class="explore-nav">
+<button class="active" onclick="showTab('biodiversity',this)">🦋 Biodiversity</button>
+<button onclick="showTab('forests',this)">🌳 Forests</button>
+<button onclick="showTab('oceans',this)">🌊 Oceans</button>
+<button onclick="showTab('climate',this)">☀️ Climate</button>
+<button onclick="showTab('art',this)">🎨 Art & Nature</button>
+<button onclick="showTab('compassion',this)">💚 Compassion</button>
+</div>
+
+<div id="biodiversity" class="explore-panel active">
+<div class="grid">
+<div class="card"><div class="icon">🐝</div><h3>Pollinators</h3><p>Bees, butterflies and other pollinators help many flowering plants reproduce. Gardens with native flowers can provide useful habitat and food.</p></div>
+<div class="card"><div class="icon">🦜</div><h3>Wildlife Connections</h3><p>Species are linked through food webs, shelter and nutrient cycles. A change to one part of an ecosystem can affect many others.</p></div>
+<div class="card"><div class="icon">🌱</div><h3>Small Habitats Matter</h3><p>Even a balcony planter, school garden or patch of native plants can provide resources for insects and birds.</p></div>
+</div>
+<div class="fact"><b>Try this:</b> Look around your neighborhood and identify three different living things. Ask: what does each one need to survive?</div>
+</div>
+
+<div id="forests" class="explore-panel">
+<div class="grid">
+<div class="card"><div class="icon">🌲</div><h3>More Than Trees</h3><p>Forests are communities of plants, animals, fungi and microorganisms. They also influence water movement, soil health and local climate.</p></div>
+<div class="card"><div class="icon">💧</div><h3>Water Guardians</h3><p>Healthy forests can slow rainfall, reduce erosion and help regulate water flowing into streams and rivers.</p></div>
+<div class="card"><div class="icon">🦥</div><h3>Homes for Life</h3><p>Different layers — canopy, understory, forest floor and roots — create many different habitats.</p></div>
+</div>
+</div>
+
+<div id="oceans" class="explore-panel">
+<div class="grid">
+<div class="card"><div class="icon">🐠</div><h3>Living Blue</h3><p>Oceans support enormous biodiversity and help regulate Earth's climate through the movement of heat and carbon.</p></div>
+<div class="card"><div class="icon">🪸</div><h3>Coral Communities</h3><p>Coral reefs provide habitat for many marine species. They are sensitive to warming and other environmental pressures.</p></div>
+<div class="card"><div class="icon">♻️</div><h3>Plastic Choices</h3><p>Reducing unnecessary single-use plastics and disposing of waste correctly can help reduce litter reaching waterways.</p></div>
+</div>
+</div>
+
+<div id="climate" class="explore-panel">
+<div class="grid">
+<div class="card"><div class="icon">🌡️</div><h3>What Is Climate?</h3><p>Weather describes short-term conditions; climate describes patterns over longer periods. Human activities are increasing greenhouse-gas concentrations and warming the planet.</p></div>
+<div class="card"><div class="icon">🚲</div><h3>Everyday Actions</h3><p>Walking, cycling, sharing rides, reducing waste and using energy thoughtfully are examples of lower-impact choices.</p></div>
+<div class="card"><div class="icon">💡</div><h3>Think Systems</h3><p>The biggest environmental improvements often come from many people and institutions changing systems together.</p></div>
+</div>
+</div>
+
+<div id="art" class="explore-panel">
+<div class="grid">
+<div class="card"><div class="icon">🎨</div><h3>Art Makes Us Notice</h3><p>Drawing, photography, music and storytelling can turn an environmental issue into something personal, visible and memorable.</p></div>
+<div class="card"><div class="icon">👀</div><h3>Look Closely</h3><p>Try observing one natural object for five minutes. Notice shapes, textures, sounds and colors without disturbing it.</p></div>
+<div class="card"><div class="icon">🖼️</div><h3>Art With a Message</h3><p>A poster can combine an image, a short fact and one practical action to encourage caring behavior.</p></div>
+</div>
+</div>
+
+<div id="compassion" class="explore-panel">
+<div class="grid">
+<div class="card"><div class="icon">💚</div><h3>Compassion for Living Things</h3><p>Compassion means noticing the needs of people, animals and ecosystems and responding with care rather than harm.</p></div>
+<div class="card"><div class="icon">🤝</div><h3>Care Together</h3><p>Environmental care can include helping classmates, sharing resources, respecting public spaces and protecting habitats.</p></div>
+<div class="card"><div class="icon">🌏</div><h3>From Feeling to Action</h3><p>Use an emotion — wonder, concern, gratitude or hope — as a starting point for one constructive action.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="games">
+<h2>🎮 Compassion Through Art: Play & Protect</h2>
+<p class="lead">These mini-games turn environmental awareness into creative decisions. Your score rewards caring choices and practical protection.</p>
+
+<div class="grid">
+<div class="card game">
+<div class="icon">💚</div><h3>Game 1: Compassion Canvas</h3>
+<p>Choose the response that shows the most care for nature and people.</p>
+<div class="choice" id="compassionChoices">
+<button onclick="answerCompassion(2,this)">A. Leave litter because someone else will clean it.</button>
+<button onclick="answerCompassion(3,this)">B. Pick up safe litter and put it in the correct bin.</button>
+<button onclick="answerCompassion(1,this)">C. Ignore it because it is not your responsibility.</button>
+</div>
+<div class="result" id="compassionResult"></div>
+</div>
+
+<div class="card game">
+<div class="icon">🖌️</div><h3>Game 2: Paint the Planet</h3>
+<p>Pick colors to build a peaceful nature poster. Each color unlocks a different message.</p>
+<div class="palette">
+<div class="swatch" style="background:#6fae5f" onclick="paintMessage('🌱 Green: Grow native plants and protect habitats.')"></div>
+<div class="swatch" style="background:#4c9fc4" onclick="paintMessage('💧 Blue: Keep rivers, lakes and oceans free from waste.')"></div>
+<div class="swatch" style="background:#f2c45b" onclick="paintMessage('☀️ Yellow: Save energy and share positive ideas.')"></div>
+<div class="swatch" style="background:#d98282" onclick="paintMessage('❤️ Red: Show compassion to people and living things.')"></div>
+</div>
+<div class="result" id="paintResult">Choose a color to reveal its message.</div>
+</div>
+
+<div class="card game">
+<div class="icon">🌳</div><h3>Game 3: Protect the Habitat</h3>
+<p>A park has three problems. Choose the action that protects the habitat.</p>
+<div class="choice">
+<button onclick="habitat(3)">🌿 Plant suitable native species and avoid damaging existing habitat.</button>
+<button onclick="habitat(1)">🗑️ Leave waste near the pond.</button>
+<button onclick="habitat(0)">🔥 Remove vegetation just to make the area look empty.</button>
+</div>
+<div class="result" id="habitatResult"></div>
+</div>
+
+<div class="card game">
+<div class="icon">🧩</div><h3>Game 4: Art-to-Action Match</h3>
+<p>Match the creative idea with a practical environmental action.</p>
+<div class="choice">
+<button onclick="matchGame(0)">📸 Photograph a beautiful river → share why clean water matters.</button>
+<button onclick="matchGame(1)">🎭 Make a short skit about waste → practice sorting waste correctly.</button>
+<button onclick="matchGame(2)">🎨 Draw a pollinator garden → learn which local plants can support pollinators.</button>
+</div>
+<div class="result" id="matchResult"></div>
+</div>
+</div>
+<p class="score">🌟 Eco-Compassion Score: <span id="score">0</span></p>
+</section>
+
+<section class="section" id="actions">
+<h2>🌍 Turn Creativity Into Action</h2>
+<div class="grid">
+<div class="card"><h3>🎨 Create</h3><p>Make a poster, poem, drawing or photo story about a local environmental issue.</p></div>
+<div class="card"><h3>🤝 Care</h3><p>Help keep shared spaces clean and treat people, animals and plants with respect.</p></div>
+<div class="card"><h3>♻️ Protect</h3><p>Reduce unnecessary waste, reuse what you can and sort recyclable material according to local rules.</p></div>
+<div class="card"><h3>📣 Inspire</h3><p>Share one clear fact and one practical action instead of only sharing a problem.</p></div>
+</div>
+</section>
+
+<footer>
+<b>Nature's Palette</b><br>
+<span class="small">Compassion • Creativity • Conservation</span>
+</footer>
+
+<script>
+let score=0;
+function addScore(n){score+=n;document.getElementById('score').textContent=score}
+function showTab(id,btn){
+ document.querySelectorAll('.explore-panel').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.explore-nav button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+}
+function answerCompassion(points,btn){
+ document.querySelectorAll('#compassionChoices button').forEach(b=>b.disabled=true);
+ if(points===3){document.getElementById('compassionResult').textContent='🌟 Great choice! Caring for shared spaces protects both people and nature.';addScore(3)}
+ else{document.getElementById('compassionResult').textContent='💡 Try again: compassion includes taking constructive care when it is safe to do so.';addScore(0)}
+}
+function paintMessage(msg){document.getElementById('paintResult').textContent=msg;addScore(1)}
+function habitat(points){
+ document.getElementById('habitatResult').textContent=points===3?'🌿 Excellent! This choice supports habitat health.':'💡 Think about how the action affects soil, plants, water and wildlife.';
+ if(points===3)addScore(3)
+}
+function matchGame(n){
+ const msgs=[
+ '📸 Great connection: art can help people notice and value clean water.',
+ '🎭 Great connection: storytelling becomes stronger when paired with a real habit.',
+ '🎨 Great connection: observation can lead to habitat-friendly planting.'
+ ];
+ document.getElementById('matchResult').textContent=msgs[n];addScore(2)
+}
+</script>
+</body>
+</html>
